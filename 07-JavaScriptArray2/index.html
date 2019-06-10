@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const people = [
+            { name: 'Vu', year: 1988 },
+            { name: 'Loreena', year: 1986 },
+            { name: 'Esther', year: 2003 },
+            { name: 'Tommy', year: 2016 }
+        ]
+
+        const comments = [
+            { text: 'Love this!', id: 523423 },
+            { text: 'Super good', id: 823423 },
+            { text: 'You are the best', id: 2039842 },
+            { text: 'Ramen is my fav food ever', id: 123523 },
+            { text: 'Nice Nice Nice!', id: 523428 },
+        ]
+
+
+        // Some and Every Checks
+        // Array.prototype.some() // is at leat one person 19?
+        const isAdult = people.some(function(person) {
+            let date = new Date()
+            return date.getFullYear() - person.year >= 19
+        })
+        // console.log({isAdult})
+
+        // Array.prototype.every() // is everyone 19th?
+
+        const isEveryoneAdult = people.every(person => ((
+            new Date()).getFullYear()) - person.year >= 19
+        )
+        // console.log(isEveryoneAdult)
+
+        // Array.prototype.find()
+        // Find is like fifteen, but instead returns just the one you are looking for
+        // find the comment with the ID of 823423
+
+        const findComment = comments.find(comment => {
+            if (comment.id === 823423) return comment
+        })
+        // console.log(findComment)
+
+        // Array.prototype.findIndex()
+        // Find the comment with this ID
+        // delete the comment with the ID of 823423
+
+        const index = comments.findIndex(comment => comment.id === 823423)
+        // comments.splice(index, 1)
+        // console.table(comments)
+
+        const newComments = [
+            ...comments.slice(0, index),
+            ...comments.slice(index + 1)
+        ]
+
+
+    </script>
+</body>
+</html>
