@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css"
     <title>SlideOnScroll</title>
 </head>
 <body>
@@ -31,7 +32,7 @@
             quod quas laborum nam! Fuga ad tempora in aspernatur pariatur fugit quibusdam dolores sunt esse magni, ut,
             dignissimos.</p>
     
-        <img src="http://unsplash.it/400/400" class="align-left slide-in">
+        <img src="http://picsum.photos/400/400" class="align-left slide-in">
     
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates, deserunt facilis et iste corrupti omnis
             tenetur est. Iste ut est dicta dolor itaque adipisci, dolorum minima, veritatis earum provident error molestias.
@@ -42,7 +43,7 @@
             fuga, nisi eligendi natus maiores illum quas quos et aperiam aut doloremque optio maxime fugiat doloribus. Eum
             dolorum expedita quam, nesciunt</p>
     
-        <img src="http://unsplash.it/400/401" class="align-right slide-in">
+        <img src="http://picsum.photos/400/400" class="align-right slide-in">
     
         <p> at provident praesentium atque quas rerum optio dignissimos repudiandae ullam illum quibusdam. Vel ad error
             quibusdam, illo ex totam placeat. Quos excepturi fuga, molestiae ea quisquam minus, ratione dicta consectetur
@@ -66,11 +67,11 @@
             Aperiam, qui ut tenetur, voluptate doloremque officiis dicta quaerat voluptatem rerum natus magni. Eum amet
             autem dolor ullam.</p>
     
-        <img src="http://unsplash.it/200/500" class="align-left slide-in">
+        <img src="http://picsum.photos/200/500" class="align-left slide-in">
     
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio maiores adipisci quibusdam repudiandae dolor
             vero placeat esse sit! Quibusdam saepe aperiam explicabo placeat optio, consequuntur nihil voluptatibus expedita
-            quia vero perferendis, deserunt et incidunt eveniet <img src="http://unsplash.it/200/200"
+            quia vero perferendis, deserunt et incidunt eveniet <img src="http://picsum.photos/200/200"
                 class="align-right slide-in"> temporibus doloremque possimus facilis. Possimus labore, officia dolore! Eaque
             ratione saepe, alias harum laboriosam deserunt laudantium blanditiis eum explicabo placeat reiciendis labore
             iste sint. Consectetur expedita dignissimos, non quos distinctio, eos rerum facilis eligendi. Asperiores
@@ -94,7 +95,7 @@
             voluptas porro officiis, amet! Molestias, fugit, ut! Tempore non magnam, amet, facere ducimus accusantium eos
             veritatis neque.</p>
     
-        <img src="http://unsplash.it/400/400" class="align-right slide-in">
+        <img src="http://picsum.photos/400/400" class="align-right slide-in">
     
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio maiores adipisci quibusdam repudiandae dolor
             vero placeat esse sit! Quibusdam saepe aperiam explicabo placeat optio, consequuntur nihil voluptatibus expedita
@@ -138,11 +139,44 @@
             quo, ipsam, quasi aspernatur quas odio nihil? Veniam amet reiciendis blanditiis quis reprehenderit repudiandae
             neque, ab ducimus, odit excepturi voluptate saepe ipsam. Voluptatem eum error voluptas porro officiis, amet!
             Molestias, fugit, ut! Tempore non magnam, amet, facere ducimus accusantium eos veritatis neque.</p>
-    
-    
-    
-    
     </div>
+    <script>
+        function debounce(func, wait = 20, immediate = true) {
+            var timeout
+            return function() {
+                var context = this, args = arguments
+                var later = function() {
+                    timeout = null
+                    if (!immediate) func.apply(context, args)
+                }
+                var callNow = immediate && !timeout
+                clearTimeout(timeout)
+                timeout = setTimeout(later, wait)
+                if (callNow) func.apply(context, args)
+            }
+        }
+
+        const sliderImages = document.querySelectorAll('.slide-in')
+
+        function checkSlide() {
+            sliderImages.forEach(sliderImage => {
+                // half way through the image
+                const slideInAt = (window.scrollY + window.innerHeight) - sliderImage.height / 2
+                // bottom of the image
+                const imageBottom = sliderImage.offsetTop + sliderImage.height
+                const isHalfShown = slideInAt > sliderImage.offsetTop
+                const isNotScrolledPast = window.scrollY < imageBottom
+                if (isHalfShown && isNotScrolledPast) {
+                    sliderImage.classList.add('active')
+                } else {
+                    sliderImage.classList.remove('active')
+                }
+            })
+        }
+
+        window.addEventListener('scroll', debounce(checkSlide))
+
+    </script>
 
 </body>
 </html>
