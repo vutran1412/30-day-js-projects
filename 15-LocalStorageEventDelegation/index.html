@@ -47,16 +47,14 @@
         const addItems = document.querySelector('.add-items');
         const removeItems = document.querySelector('.remove-items')
         const removeChecks = document.querySelector('.clear-checked')
-        const itemsList = document.querySelector('.plates');
-        const items = JSON.parse(localStorage.getItem('items')) || [];
+        let itemsList = document.querySelector('.plates');
+        let items = JSON.parse(localStorage.getItem('items')) || [];
 
         function clearItems(e) {
             e.preventDefault()
-            items.forEach(item => {
-                items.pop()
-            });
-            populateList(items, itemsList)
+            items = []
             localStorage.clear()
+            populateList(items, itemsList)
             this.reset()
         }
 
